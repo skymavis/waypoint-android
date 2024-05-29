@@ -3,6 +3,8 @@ package com.skymavis.sdk.example
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.os.Debug
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -102,6 +104,12 @@ fun ShowDialogResult(uri: Uri?, state: String) {
 
     uri?.let {
         var result = Result.from(uri)
+        println("Is success: ${result.isSuccess}")
+        println("Method: ${result.method}")
+        println("Address: ${result.address}")
+        println("Data: ${result.data}")
+        println("State: ${result.state}")
+
         if (result.state == state) {
             showDialog = true
         }
@@ -148,7 +156,7 @@ fun CallContractButton( context: Context, onStateChange : (String) -> Unit) {
             val value = "0x0"
             // Approve data
             val data =
-                "0xa9059cbb000000000000000000000000edb40e7abaa613a0b06d86260dd55c7eb2df2447000000000000000000000000000000000000000000000000016345785d8a0000";
+                "0x095ea7b30000000000000000000000006b190089ed7f75fe17b3b0a17f6ebd69f72c3f630000000000000000000000000000000000000000000000000de0b6b3a7640000";
             val state = client.callContract(
                 context,
                 redirectUri,

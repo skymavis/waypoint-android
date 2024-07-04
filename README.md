@@ -23,17 +23,16 @@ Android SDK use to interact with Mavis ID, use to develop in app Web3 wallet
 
 ### Import lib
 
-- Create a `libs` directory in `example`
+- Create a `libs` directory
 - Download release package to the `libs` dir has been created
-- Add : `implementation(files("libs/mavis-id-sdk-v0.1.0-rc.aar"))` to `dependencies` block in `build.gradle`
+- Add : `implementation(files("libs/id-0.1.0.aar"))` to `dependencies` block in `build.gradle`
 
 ### Gradle
 
 Config maven `settings.gradle`
 
 ```
-maven
-{
+maven {
     url = uri("https://maven.pkg.github.com/skymavis/mavis-id-android")
 }
 ```
@@ -41,7 +40,7 @@ maven
 Add to `build.gradle`
 
 ```
-implementation("com.skymavis.sdk.id:1.0.0")
+implementation("com.skymavis.sdk:id:0.1.0")
 ```
 
 ## Getting started

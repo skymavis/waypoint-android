@@ -17,13 +17,32 @@ Android SDK use to interact with Mavis ID, use to develop in app Web3 wallet
 - Request permission to use Mavis ID
 - Go to Developer Console > your app > App Permission > Mavis ID > Request Access
 
-[Head to the detail guide](https://docs.skymavis.com/comming-soon) to acquired `YOUR_APP_ID` and `YOUR_REDIRECT_URI`
+[Go to developer portal](https://developers.skymavis.com/) to acquired `YOUR_APP_ID` and `YOUR_REDIRECT_URI`
 
 ## Installation
+
+### Import lib
 
 - Create a `libs` directory in `example`
 - Download release package to the `libs` dir has been created
 - Add : `implementation(files("libs/mavis-id-sdk-v0.1.0-rc.aar"))` to `dependencies` block in `build.gradle`
+
+### Gradle
+
+Config maven `settings.gradle`
+
+```
+maven
+{
+    url = uri("https://maven.pkg.github.com/skymavis/mavis-id-android")
+}
+```
+
+Add to `build.gradle`
+
+```
+implementation("com.skymavis.sdk.id:1.0.0")
+```
 
 ## Getting started
 
@@ -43,11 +62,11 @@ Config your `AndroidManifest.xml` with `redirectUri` has been registered with Ma
 
 ## Initialization
 
-Initial SDK `client`
+Initial SDK `Client`
 
 - `redirectUri` : The redirect URI registered in Mavis ID. This is the URI that the user will be redirected to after the operation.
 - `clientId`: The client ID registered in Mavis ID. This is used to identify your application.
-  `gateOrigin` : The URL of Mavis ID. This is the base URL for all API calls.
+- `gateOrigin` : The URL of Mavis ID. This is the base URL for all API calls.
 - `chainId`: The ID of the blockchain network. In this example, it's set to 2021 for the Ronin Testnet.
 
 ```kotlin

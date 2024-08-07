@@ -22,7 +22,7 @@ For more information about the initial setup, see [Get started](https://docs.sky
 
 ## Installation
 
-### Import the lib
+### Import the library
 
 1. In your Android project, create a `libs` directory.
 2. Download the [Mavis ID Android SDK](https://github.com/skymavis/mavis-id-android/releases) release package and extract the contents into `libs`.
@@ -75,9 +75,9 @@ val redirectUri = "mydapp://callback"
 val clientId = "cbabcb00-9c99-404b-a6e4-c76b3b59f0d8"
 // Base URL of Mavis ID for all API calls
 val gateOrigin = "http://id.skymavis.com"
-// Ronin chain ID to connect to: `2021` for Saigon testnet and `2020` for Ronin mainnet
+// Saigon testnet chain ID
 val chainId = 2021
-// 
+// Saigon testnet public RPC endpoint 
 val rpcUrl = "https://saigon-testnet.roninchain.com/rpc"
 
 client = Client(
@@ -174,7 +174,7 @@ println("State: ${result.state}")
 
 ### Call contracts
 
-Allows another contract to spend 1 AXS on user's behalf.
+Allows another contract to spend 1 AXS on user's behalf, returning a transaction hash.
 
 ```kotlin
 // Address of the smart contract to interact with
@@ -207,4 +207,4 @@ println("State: ${result.state}")
 
 ## Documentation
 
-For more information, see the [Mavis ID Android SDK](https://docs.skymavis.com/mavis/mavis-id/guides/android-sdk) guide.
+For more information, see the [Mavis ID Android SDK](https://docs.skymavis.com/mavis/mavis-id/guides/android-sdk) integration guide.

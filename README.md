@@ -52,7 +52,7 @@ dependencies {
 }
 ```
 
-#### Configure Android Manifest
+### Configure Android Manifest
 
 Update your app's `AndroidManifest.xml` file with the redirect URI that you registered in the Developer Console:
 

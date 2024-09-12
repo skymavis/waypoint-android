@@ -110,7 +110,7 @@ println("State: ${result.state}")
 
 ### Send transactions
 
-Transfers 1 RON to another address, returning a transaction hash.
+Transfers 0.1 RON to another address, returning a transaction hash.
 
 ```kotlin
 import com.skymavis.sdk.id.Client
@@ -118,7 +118,7 @@ import com.skymavis.sdk.id.Result
 
 // Recipient address
 val to = "0xD36deD8E1927dCDD76Bfe0CC95a5C1D65c0a807a";
-// Value in wei (1 RON = 10^18 wei)
+// 0.1 RON in wei
 val value = "1000000000000000000";
 // Request ID
 val state = client.sendTransaction(context, redirectUri, to, value);

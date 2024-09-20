@@ -203,4 +203,4 @@ waypoint.callContract(
 
 ## Documentation
 
-For more information, see the [Ronin Waypoint Android SDK](https://docs.skymavis.com/mavis/mavis-id/guides/android-sdk) integration guide.
+For more information, see the [Ronin Waypoint Android SDK](https://docs.skymavis.com/mavis/ronin-waypoint/reference/android-sdk) integration guide.

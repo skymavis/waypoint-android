@@ -1,6 +1,12 @@
 pluginManagement {
     repositories {
-        google()
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
         mavenCentral()
         gradlePluginPortal()
     }
@@ -13,7 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "skymavis-android-sdk"
-include(":example", ":sdk")
-
-project(":sdk").projectDir = file("./sdk")
+rootProject.name = "Ronin Waypoint Example"
+include(":app")
+ 

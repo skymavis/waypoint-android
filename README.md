@@ -32,24 +32,6 @@ dependencies {
 }
 ```
 
-### Configure Gradle
-
-In `settings.gradle`, include the Maven repository URL:
-
-```gradle
-maven {
-    url = uri("https://maven.pkg.github.com/skymavis/waypoint-android")
-}
-```
-
-Add the dependency to `build.gradle`:
-
-```gradle
-dependencies {
-    implementation("com.skymavis.sdk:waypoint:0.1.0")
-}
-```
-
 ### Configure Android Manifest
 
 Update your app's `AndroidManifest.xml` file with the redirect URI that you registered in the Developer Console:

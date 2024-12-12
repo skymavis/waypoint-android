@@ -15,6 +15,3 @@
 local.properties
 .idea/
 *.aar
-
-sdk/build
-example/build

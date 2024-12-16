@@ -1,11 +1,13 @@
 package com.skymavis.sdk.waypoint;
 
 import android.content.Context;
+import android.net.Uri;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 public class Waypoint {
     private final String clientId;
@@ -22,6 +24,15 @@ public class Waypoint {
         Network network = isTestnet ? Network.Testnet : Network.Mainnet;
         this.rpcUrl = network.rpcUrl;
         this.chainId = network.chainId;
+    }
+
+    public void onResponse(Uri uri) {
+        if (uri == null) {
+            return;
+        }
+        Response response = Response.parseDeeplink(uri);
+        String state = response.state;
+        Request.resolveAsyncRequest(state, uri.toString());
     }
 
     private String constructWaypointEndpoint(String method) {
@@ -55,8 +66,7 @@ public class Waypoint {
         params.put(RequestParams.redirect, redirectUri);
         params.put(RequestParams.chainId, String.valueOf(chainId));
         if (additionalParams != null) {
-            additionalParams.entrySet().stream()
-                    .filter(entry -> entry.getValue() != null)
+            additionalParams.entrySet().stream().filter(entry -> entry.getValue() != null)
                     .forEach(entry -> params.put(entry.getKey(), entry.getValue()));
         }
         return params;
@@ -73,6 +83,11 @@ public class Waypoint {
         request.execute();
     }
 
+    public CompletableFuture<String> authorizeAsync(Context context, String state, String scope) {
+        authorize(context, state, scope);
+        return Request.createAsyncRequest(state);
+    }
+
     public void personalSign(Context context, String state, String message, String from) {
         String endpoint = constructWaypointEndpoint(ServicePaths.sign);
 
@@ -83,6 +98,11 @@ public class Waypoint {
 
         Request request = new Request(context, endpoint, constructWaypointParams(additionalParams));
         request.execute();
+    }
+
+    public CompletableFuture<String> personalSignAsync(Context context, String state, String message, String from) {
+        personalSign(context, state, message, from);
+        return Request.createAsyncRequest(state);
     }
 
     public void signTypedData(Context context, String state, String typedData, String from) {
@@ -97,8 +117,12 @@ public class Waypoint {
         request.execute();
     }
 
-    public void sendTransaction(Context context, String state, String to, String data, String value,
-                                String from) {
+    public CompletableFuture<String> signTypedDataAsync(Context context, String state, String typedData, String from) {
+        signTypedData(context, state, typedData, from);
+        return Request.createAsyncRequest(state);
+    }
+
+    public void sendTransaction(Context context, String state, String to, String data, String value, String from) {
         String endpoint = constructWaypointEndpoint(ServicePaths.send);
 
         HashMap<String, String> additionalParams = new HashMap<>();
@@ -110,6 +134,12 @@ public class Waypoint {
 
         Request request = new Request(context, endpoint, constructWaypointParams(additionalParams));
         request.execute();
+    }
+
+    public CompletableFuture<String> sendTransactionAsync(Context context, String state, String to, String data,
+                                                          String value, String from) {
+        sendTransaction(context, state, to, data, value, from);
+        return Request.createAsyncRequest(state);
     }
 
     public void sendNativeToken(Context context, String state, String to, String value, String from) {
@@ -125,8 +155,14 @@ public class Waypoint {
         request.execute();
     }
 
-    public void authAsGuest(Context context, String state, String credential, String authDate,
-                            String hash, String scope) {
+    public CompletableFuture<String> sendNativeTokenAsync(Context context, String state, String to, String value,
+                                                          String from) {
+        sendNativeToken(context, state, to, value, from);
+        return Request.createAsyncRequest(state);
+    }
+
+    public void authAsGuest(Context context, String state, String credential, String authDate, String hash,
+                            String scope) {
         String endpoint = constructWaypointEndpoint(ServicePaths.guests);
 
         HashMap<String, String> additionalParams = new HashMap<>();
@@ -140,6 +176,12 @@ public class Waypoint {
         request.execute();
     }
 
+    public CompletableFuture<String> authAsGuestAsync(Context context, String state, String credential, String authDate,
+                                                      String hash, String scope) {
+        authAsGuest(context, state, credential, authDate, hash, scope);
+        return Request.createAsyncRequest(state);
+    }
+
     public void registerGuestAccount(Context context, String state) {
         String endpoint = constructWaypointEndpoint(ServicePaths.register);
 
@@ -150,6 +192,11 @@ public class Waypoint {
         request.execute();
     }
 
+    public CompletableFuture<String> registerGuestAccountAsync(Context context, String state) {
+        registerGuestAccount(context, state);
+        return Request.createAsyncRequest(state);
+    }
+
     public void createKeylessWallet(Context context, String state) {
         String endpoint = constructWaypointEndpoint(ServicePaths.setup);
 
@@ -158,5 +205,10 @@ public class Waypoint {
 
         Request request = new Request(context, endpoint, constructWaypointParams(additionalParams));
         request.execute();
+    }
+
+    public CompletableFuture<String> createKeylessWalletAsync(Context context, String state) {
+        createKeylessWallet(context, state);
+        return Request.createAsyncRequest(state);
     }
 }

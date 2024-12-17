@@ -65,7 +65,7 @@ public class Response {
         return "Response{" +
                 "success=" + success +
                 ", state='" + state + '\'' +
-                ", error=" + error +
+                ", error=" + (error != null ? error.toString() : null) +
                 ", data=" + data +
                 '}';
     }

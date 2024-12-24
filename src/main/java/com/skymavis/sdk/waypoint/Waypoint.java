@@ -14,16 +14,18 @@ public class Waypoint {
     private final String waypointOrigin;
     private final String redirectUri;
     private final String rpcUrl;
-    private final int chainId;
+    private final Number chainId;
 
-    public Waypoint(String waypointOrigin, String clientId, String redirectUri, Boolean isTestnet) {
+    public Waypoint(String waypointOrigin, String clientId, String redirectUri, String rpcUrl, Number chainId) {
         this.waypointOrigin = waypointOrigin;
         this.clientId = clientId;
         this.redirectUri = redirectUri;
+        this.rpcUrl = rpcUrl;
+        this.chainId = chainId;
+    }
 
-        Network network = isTestnet ? Network.Testnet : Network.Mainnet;
-        this.rpcUrl = network.rpcUrl;
-        this.chainId = network.chainId;
+    public Waypoint(String waypointOrigin, String clientId, String redirectUri) {
+        this(waypointOrigin, clientId, redirectUri, Network.Mainnet.rpcUrl, Network.Mainnet.chainId);
     }
 
     public void onResponse(Uri uri) {
